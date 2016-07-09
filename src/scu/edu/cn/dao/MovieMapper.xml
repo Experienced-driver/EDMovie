@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.MovieMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.Movie" >
+    <id column="Mv_id" property="mvId" jdbcType="INTEGER" />
+    <result column="En_name" property="enName" jdbcType="VARCHAR" />
+    <result column="Zh_name" property="zhName" jdbcType="VARCHAR" />
+    <result column="Director" property="director" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="Lead_act" property="leadAct" jdbcType="VARCHAR" />
+    <result column="Length" property="length" jdbcType="TIME" />
+    <result column="Init_time" property="initTime" jdbcType="TIMESTAMP" />
+    <result column="Modi_time" property="modiTime" jdbcType="TIMESTAMP" />
+    <result column="Screen_date" property="screenDate" jdbcType="DATE" />
+    <result column="Score_total" property="scoreTotal" jdbcType="INTEGER" />
+    <result column="Scorer_amount" property="scorerAmount" jdbcType="INTEGER" />
+    <result column="Img" property="img" jdbcType="VARCHAR" />
+    <result column="Prevue" property="prevue" jdbcType="VARCHAR" />
+    <result column="Mv_memo" property="mvMemo" jdbcType="VARCHAR" />
+    <result column="Preserved_num" property="preservedNum" jdbcType="DOUBLE" />
+    <result column="Preserved_str" property="preservedStr" jdbcType="VARCHAR" />
+    <result column="Upload_id" property="uploadId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Mv_id, En_name, Zh_name, Director, Description, Lead_act, Length, Init_time, Modi_time, 
+    Screen_date, Score_total, Scorer_amount, Img, Prevue, Mv_memo, Preserved_num, Preserved_str, 
+    Upload_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mv_info
+    where Mv_id = #{mvId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mv_info
+    where Mv_id = #{mvId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.Movie" >
+    insert into mv_info (Mv_id, En_name, Zh_name, 
+      Director, Description, Lead_act, 
+      Length, Init_time, Modi_time, 
+      Screen_date, Score_total, Scorer_amount, 
+      Img, Prevue, Mv_memo, 
+      Preserved_num, Preserved_str, Upload_id
+      )
+    values (#{mvId,jdbcType=INTEGER}, #{enName,jdbcType=VARCHAR}, #{zhName,jdbcType=VARCHAR}, 
+      #{director,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{leadAct,jdbcType=VARCHAR}, 
+      #{length,jdbcType=TIME}, #{initTime,jdbcType=TIMESTAMP}, #{modiTime,jdbcType=TIMESTAMP}, 
+      #{screenDate,jdbcType=DATE}, #{scoreTotal,jdbcType=INTEGER}, #{scorerAmount,jdbcType=INTEGER}, 
+      #{img,jdbcType=VARCHAR}, #{prevue,jdbcType=VARCHAR}, #{mvMemo,jdbcType=VARCHAR}, 
+      #{preservedNum,jdbcType=DOUBLE}, #{preservedStr,jdbcType=VARCHAR}, #{uploadId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.Movie" >
+    insert into mv_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mvId != null" >
+        Mv_id,
+      </if>
+      <if test="enName != null" >
+        En_name,
+      </if>
+      <if test="zhName != null" >
+        Zh_name,
+      </if>
+      <if test="director != null" >
+        Director,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="leadAct != null" >
+        Lead_act,
+      </if>
+      <if test="length != null" >
+        Length,
+      </if>
+      <if test="initTime != null" >
+        Init_time,
+      </if>
+      <if test="modiTime != null" >
+        Modi_time,
+      </if>
+      <if test="screenDate != null" >
+        Screen_date,
+      </if>
+      <if test="scoreTotal != null" >
+        Score_total,
+      </if>
+      <if test="scorerAmount != null" >
+        Scorer_amount,
+      </if>
+      <if test="img != null" >
+        Img,
+      </if>
+      <if test="prevue != null" >
+        Prevue,
+      </if>
+      <if test="mvMemo != null" >
+        Mv_memo,
+      </if>
+      <if test="preservedNum != null" >
+        Preserved_num,
+      </if>
+      <if test="preservedStr != null" >
+        Preserved_str,
+      </if>
+      <if test="uploadId != null" >
+        Upload_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mvId != null" >
+        #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="zhName != null" >
+        #{zhName,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null" >
+        #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="leadAct != null" >
+        #{leadAct,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=TIME},
+      </if>
+      <if test="initTime != null" >
+        #{initTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiTime != null" >
+        #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="screenDate != null" >
+        #{screenDate,jdbcType=DATE},
+      </if>
+      <if test="scoreTotal != null" >
+        #{scoreTotal,jdbcType=INTEGER},
+      </if>
+      <if test="scorerAmount != null" >
+        #{scorerAmount,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="prevue != null" >
+        #{prevue,jdbcType=VARCHAR},
+      </if>
+      <if test="mvMemo != null" >
+        #{mvMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="preservedNum != null" >
+        #{preservedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="preservedStr != null" >
+        #{preservedStr,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadId != null" >
+        #{uploadId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.Movie" >
+    update mv_info
+    <set >
+      <if test="enName != null" >
+        En_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="zhName != null" >
+        Zh_name = #{zhName,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null" >
+        Director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="leadAct != null" >
+        Lead_act = #{leadAct,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        Length = #{length,jdbcType=TIME},
+      </if>
+      <if test="initTime != null" >
+        Init_time = #{initTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiTime != null" >
+        Modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="screenDate != null" >
+        Screen_date = #{screenDate,jdbcType=DATE},
+      </if>
+      <if test="scoreTotal != null" >
+        Score_total = #{scoreTotal,jdbcType=INTEGER},
+      </if>
+      <if test="scorerAmount != null" >
+        Scorer_amount = #{scorerAmount,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        Img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="prevue != null" >
+        Prevue = #{prevue,jdbcType=VARCHAR},
+      </if>
+      <if test="mvMemo != null" >
+        Mv_memo = #{mvMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="preservedNum != null" >
+        Preserved_num = #{preservedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="preservedStr != null" >
+        Preserved_str = #{preservedStr,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadId != null" >
+        Upload_id = #{uploadId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Mv_id = #{mvId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.Movie" >
+    update mv_info
+    set En_name = #{enName,jdbcType=VARCHAR},
+      Zh_name = #{zhName,jdbcType=VARCHAR},
+      Director = #{director,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      Lead_act = #{leadAct,jdbcType=VARCHAR},
+      Length = #{length,jdbcType=TIME},
+      Init_time = #{initTime,jdbcType=TIMESTAMP},
+      Modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      Screen_date = #{screenDate,jdbcType=DATE},
+      Score_total = #{scoreTotal,jdbcType=INTEGER},
+      Scorer_amount = #{scorerAmount,jdbcType=INTEGER},
+      Img = #{img,jdbcType=VARCHAR},
+      Prevue = #{prevue,jdbcType=VARCHAR},
+      Mv_memo = #{mvMemo,jdbcType=VARCHAR},
+      Preserved_num = #{preservedNum,jdbcType=DOUBLE},
+      Preserved_str = #{preservedStr,jdbcType=VARCHAR},
+      Upload_id = #{uploadId,jdbcType=VARCHAR}
+    where Mv_id = #{mvId,jdbcType=INTEGER}
+  </update>
+</mapper>

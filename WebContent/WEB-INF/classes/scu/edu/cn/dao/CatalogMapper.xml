@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.CatalogMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.Catalog" >
+    <id column="cata_id" property="cataId" jdbcType="INTEGER" />
+    <result column="cata_name" property="cataName" jdbcType="VARCHAR" />
+    <result column="cata_link" property="cataLink" jdbcType="VARCHAR" />
+    <result column="cata_value" property="cataValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cata_id, cata_name, cata_link, cata_value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from catalog
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from catalog
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.Catalog" >
+    insert into catalog (cata_id, cata_name, cata_link, 
+      cata_value)
+    values (#{cataId,jdbcType=INTEGER}, #{cataName,jdbcType=VARCHAR}, #{cataLink,jdbcType=VARCHAR}, 
+      #{cataValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.Catalog" >
+    insert into catalog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cataId != null" >
+        cata_id,
+      </if>
+      <if test="cataName != null" >
+        cata_name,
+      </if>
+      <if test="cataLink != null" >
+        cata_link,
+      </if>
+      <if test="cataValue != null" >
+        cata_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cataId != null" >
+        #{cataId,jdbcType=INTEGER},
+      </if>
+      <if test="cataName != null" >
+        #{cataName,jdbcType=VARCHAR},
+      </if>
+      <if test="cataLink != null" >
+        #{cataLink,jdbcType=VARCHAR},
+      </if>
+      <if test="cataValue != null" >
+        #{cataValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.Catalog" >
+    update catalog
+    <set >
+      <if test="cataName != null" >
+        cata_name = #{cataName,jdbcType=VARCHAR},
+      </if>
+      <if test="cataLink != null" >
+        cata_link = #{cataLink,jdbcType=VARCHAR},
+      </if>
+      <if test="cataValue != null" >
+        cata_value = #{cataValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.Catalog" >
+    update catalog
+    set cata_name = #{cataName,jdbcType=VARCHAR},
+      cata_link = #{cataLink,jdbcType=VARCHAR},
+      cata_value = #{cataValue,jdbcType=VARCHAR}
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </update>
+</mapper>

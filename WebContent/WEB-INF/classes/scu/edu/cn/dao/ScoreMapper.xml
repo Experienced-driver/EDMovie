@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.Score" >
+    <id column="Score_id" property="scoreId" jdbcType="INTEGER" />
+    <result column="User_id" property="userId" jdbcType="INTEGER" />
+    <result column="Mv_id" property="mvId" jdbcType="INTEGER" />
+    <result column="Score_time" property="scoreTime" jdbcType="TIME" />
+    <result column="Score_status" property="scoreStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Score_id, User_id, Mv_id, Score_time, Score_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where Score_id = #{scoreId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from score
+    where Score_id = #{scoreId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.Score" >
+    insert into score (Score_id, User_id, Mv_id, 
+      Score_time, Score_status)
+    values (#{scoreId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{mvId,jdbcType=INTEGER}, 
+      #{scoreTime,jdbcType=TIME}, #{scoreStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.Score" >
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        Score_id,
+      </if>
+      <if test="userId != null" >
+        User_id,
+      </if>
+      <if test="mvId != null" >
+        Mv_id,
+      </if>
+      <if test="scoreTime != null" >
+        Score_time,
+      </if>
+      <if test="scoreStatus != null" >
+        Score_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mvId != null" >
+        #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreTime != null" >
+        #{scoreTime,jdbcType=TIME},
+      </if>
+      <if test="scoreStatus != null" >
+        #{scoreStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.Score" >
+    update score
+    <set >
+      <if test="userId != null" >
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mvId != null" >
+        Mv_id = #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreTime != null" >
+        Score_time = #{scoreTime,jdbcType=TIME},
+      </if>
+      <if test="scoreStatus != null" >
+        Score_status = #{scoreStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.Score" >
+    update score
+    set User_id = #{userId,jdbcType=INTEGER},
+      Mv_id = #{mvId,jdbcType=INTEGER},
+      Score_time = #{scoreTime,jdbcType=TIME},
+      Score_status = #{scoreStatus,jdbcType=VARCHAR}
+    where Score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.UserInfo" >
+    <id column="User_id" property="userId" jdbcType="INTEGER" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Qq" property="qq" jdbcType="INTEGER" />
+    <result column="Username" property="username" jdbcType="VARCHAR" />
+    <result column="Gender" property="gender" jdbcType="VARCHAR" />
+    <result column="Birthdate" property="birthdate" jdbcType="DATE" />
+    <result column="Sign_date" property="signDate" jdbcType="TIMESTAMP" />
+    <result column="User_status" property="userStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    User_id, Password, Email, Qq, Username, Gender, Birthdate, Sign_date, User_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where User_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_info
+    where User_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.UserInfo" >
+    insert into user_info (User_id, Password, Email, 
+      Qq, Username, Gender, 
+      Birthdate, Sign_date, User_status
+      )
+    values (#{userId,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{birthdate,jdbcType=DATE}, #{signDate,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.UserInfo" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        User_id,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="qq != null" >
+        Qq,
+      </if>
+      <if test="username != null" >
+        Username,
+      </if>
+      <if test="gender != null" >
+        Gender,
+      </if>
+      <if test="birthdate != null" >
+        Birthdate,
+      </if>
+      <if test="signDate != null" >
+        Sign_date,
+      </if>
+      <if test="userStatus != null" >
+        User_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        #{birthdate,jdbcType=DATE},
+      </if>
+      <if test="signDate != null" >
+        #{signDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.UserInfo" >
+    update user_info
+    <set >
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        Qq = #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        Username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        Gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        Birthdate = #{birthdate,jdbcType=DATE},
+      </if>
+      <if test="signDate != null" >
+        Sign_date = #{signDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null" >
+        User_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where User_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.UserInfo" >
+    update user_info
+    set Password = #{password,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Qq = #{qq,jdbcType=INTEGER},
+      Username = #{username,jdbcType=VARCHAR},
+      Gender = #{gender,jdbcType=VARCHAR},
+      Birthdate = #{birthdate,jdbcType=DATE},
+      Sign_date = #{signDate,jdbcType=TIMESTAMP},
+      User_status = #{userStatus,jdbcType=VARCHAR}
+    where User_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

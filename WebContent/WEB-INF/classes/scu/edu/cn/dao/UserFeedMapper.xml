@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.UserFeedMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.UserFeed" >
+    <id column="Feed_id" property="feedId" jdbcType="INTEGER" />
+    <result column="Feed_cont" property="feedCont" jdbcType="VARCHAR" />
+    <result column="User_id" property="userId" jdbcType="INTEGER" />
+    <result column="Feed_time" property="feedTime" jdbcType="TIMESTAMP" />
+    <result column="Feed_status" property="feedStatus" jdbcType="VARCHAR" />
+    <result column="Feed_receiver" property="feedReceiver" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Feed_id, Feed_cont, User_id, Feed_time, Feed_status, Feed_receiver
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_feed
+    where Feed_id = #{feedId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_feed
+    where Feed_id = #{feedId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.UserFeed" >
+    insert into user_feed (Feed_id, Feed_cont, User_id, 
+      Feed_time, Feed_status, Feed_receiver
+      )
+    values (#{feedId,jdbcType=INTEGER}, #{feedCont,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{feedTime,jdbcType=TIMESTAMP}, #{feedStatus,jdbcType=VARCHAR}, #{feedReceiver,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.UserFeed" >
+    insert into user_feed
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="feedId != null" >
+        Feed_id,
+      </if>
+      <if test="feedCont != null" >
+        Feed_cont,
+      </if>
+      <if test="userId != null" >
+        User_id,
+      </if>
+      <if test="feedTime != null" >
+        Feed_time,
+      </if>
+      <if test="feedStatus != null" >
+        Feed_status,
+      </if>
+      <if test="feedReceiver != null" >
+        Feed_receiver,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="feedId != null" >
+        #{feedId,jdbcType=INTEGER},
+      </if>
+      <if test="feedCont != null" >
+        #{feedCont,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="feedTime != null" >
+        #{feedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedStatus != null" >
+        #{feedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="feedReceiver != null" >
+        #{feedReceiver,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.UserFeed" >
+    update user_feed
+    <set >
+      <if test="feedCont != null" >
+        Feed_cont = #{feedCont,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="feedTime != null" >
+        Feed_time = #{feedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedStatus != null" >
+        Feed_status = #{feedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="feedReceiver != null" >
+        Feed_receiver = #{feedReceiver,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Feed_id = #{feedId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.UserFeed" >
+    update user_feed
+    set Feed_cont = #{feedCont,jdbcType=VARCHAR},
+      User_id = #{userId,jdbcType=INTEGER},
+      Feed_time = #{feedTime,jdbcType=TIMESTAMP},
+      Feed_status = #{feedStatus,jdbcType=VARCHAR},
+      Feed_receiver = #{feedReceiver,jdbcType=INTEGER}
+    where Feed_id = #{feedId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.HotListMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.HotList" >
+    <id column="hot_id" property="hotId" jdbcType="INTEGER" />
+    <result column="hot_serial" property="hotSerial" jdbcType="VARCHAR" />
+    <result column="hot_mv_id" property="hotMvId" jdbcType="INTEGER" />
+    <result column="hot_pos" property="hotPos" jdbcType="INTEGER" />
+    <result column="hot_type" property="hotType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    hot_id, hot_serial, hot_mv_id, hot_pos, hot_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hot_list
+    where hot_id = #{hotId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hot_list
+    where hot_id = #{hotId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.HotList" >
+    insert into hot_list (hot_id, hot_serial, hot_mv_id, 
+      hot_pos, hot_type)
+    values (#{hotId,jdbcType=INTEGER}, #{hotSerial,jdbcType=VARCHAR}, #{hotMvId,jdbcType=INTEGER}, 
+      #{hotPos,jdbcType=INTEGER}, #{hotType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.HotList" >
+    insert into hot_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hotId != null" >
+        hot_id,
+      </if>
+      <if test="hotSerial != null" >
+        hot_serial,
+      </if>
+      <if test="hotMvId != null" >
+        hot_mv_id,
+      </if>
+      <if test="hotPos != null" >
+        hot_pos,
+      </if>
+      <if test="hotType != null" >
+        hot_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hotId != null" >
+        #{hotId,jdbcType=INTEGER},
+      </if>
+      <if test="hotSerial != null" >
+        #{hotSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="hotMvId != null" >
+        #{hotMvId,jdbcType=INTEGER},
+      </if>
+      <if test="hotPos != null" >
+        #{hotPos,jdbcType=INTEGER},
+      </if>
+      <if test="hotType != null" >
+        #{hotType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.HotList" >
+    update hot_list
+    <set >
+      <if test="hotSerial != null" >
+        hot_serial = #{hotSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="hotMvId != null" >
+        hot_mv_id = #{hotMvId,jdbcType=INTEGER},
+      </if>
+      <if test="hotPos != null" >
+        hot_pos = #{hotPos,jdbcType=INTEGER},
+      </if>
+      <if test="hotType != null" >
+        hot_type = #{hotType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hot_id = #{hotId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.HotList" >
+    update hot_list
+    set hot_serial = #{hotSerial,jdbcType=VARCHAR},
+      hot_mv_id = #{hotMvId,jdbcType=INTEGER},
+      hot_pos = #{hotPos,jdbcType=INTEGER},
+      hot_type = #{hotType,jdbcType=VARCHAR}
+    where hot_id = #{hotId,jdbcType=INTEGER}
+  </update>
+</mapper>

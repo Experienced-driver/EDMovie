@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.ChangePswMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.ChangePsw" >
+    <id column="change_psw_id" property="changePswId" jdbcType="INTEGER" />
+    <result column="User_id" property="userId" jdbcType="INTEGER" />
+    <result column="change_time" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="change_email" property="changeEmail" jdbcType="VARCHAR" />
+    <result column="old_psw" property="oldPsw" jdbcType="VARCHAR" />
+    <result column="new_psw" property="newPsw" jdbcType="VARCHAR" />
+    <result column="psw_status" property="pswStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    change_psw_id, User_id, change_time, change_email, old_psw, new_psw, psw_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from change_psw
+    where change_psw_id = #{changePswId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from change_psw
+    where change_psw_id = #{changePswId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.ChangePsw" >
+    insert into change_psw (change_psw_id, User_id, change_time, 
+      change_email, old_psw, new_psw, 
+      psw_status)
+    values (#{changePswId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{changeTime,jdbcType=TIMESTAMP}, 
+      #{changeEmail,jdbcType=VARCHAR}, #{oldPsw,jdbcType=VARCHAR}, #{newPsw,jdbcType=VARCHAR}, 
+      #{pswStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.ChangePsw" >
+    insert into change_psw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="changePswId != null" >
+        change_psw_id,
+      </if>
+      <if test="userId != null" >
+        User_id,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="changeEmail != null" >
+        change_email,
+      </if>
+      <if test="oldPsw != null" >
+        old_psw,
+      </if>
+      <if test="newPsw != null" >
+        new_psw,
+      </if>
+      <if test="pswStatus != null" >
+        psw_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="changePswId != null" >
+        #{changePswId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeEmail != null" >
+        #{changeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPsw != null" >
+        #{oldPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="newPsw != null" >
+        #{newPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="pswStatus != null" >
+        #{pswStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.ChangePsw" >
+    update change_psw
+    <set >
+      <if test="userId != null" >
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeEmail != null" >
+        change_email = #{changeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPsw != null" >
+        old_psw = #{oldPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="newPsw != null" >
+        new_psw = #{newPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="pswStatus != null" >
+        psw_status = #{pswStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where change_psw_id = #{changePswId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.ChangePsw" >
+    update change_psw
+    set User_id = #{userId,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      change_email = #{changeEmail,jdbcType=VARCHAR},
+      old_psw = #{oldPsw,jdbcType=VARCHAR},
+      new_psw = #{newPsw,jdbcType=VARCHAR},
+      psw_status = #{pswStatus,jdbcType=VARCHAR}
+    where change_psw_id = #{changePswId,jdbcType=INTEGER}
+  </update>
+</mapper>

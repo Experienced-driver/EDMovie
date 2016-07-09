@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.CommentsMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.Comments" >
+    <id column="com_id" property="comId" jdbcType="INTEGER" />
+    <result column="User_id" property="userId" jdbcType="INTEGER" />
+    <result column="Mv_id" property="mvId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="com_status" property="comStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    com_id, User_id, Mv_id, content, com_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from comments
+    where com_id = #{comId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comments
+    where com_id = #{comId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.Comments" >
+    insert into comments (com_id, User_id, Mv_id, 
+      content, com_status)
+    values (#{comId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{mvId,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{comStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.Comments" >
+    insert into comments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="comId != null" >
+        com_id,
+      </if>
+      <if test="userId != null" >
+        User_id,
+      </if>
+      <if test="mvId != null" >
+        Mv_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="comStatus != null" >
+        com_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="comId != null" >
+        #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mvId != null" >
+        #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="comStatus != null" >
+        #{comStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.Comments" >
+    update comments
+    <set >
+      <if test="userId != null" >
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mvId != null" >
+        Mv_id = #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="comStatus != null" >
+        com_status = #{comStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where com_id = #{comId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.Comments" >
+    update comments
+    set User_id = #{userId,jdbcType=INTEGER},
+      Mv_id = #{mvId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      com_status = #{comStatus,jdbcType=VARCHAR}
+    where com_id = #{comId,jdbcType=INTEGER}
+  </update>
+</mapper>

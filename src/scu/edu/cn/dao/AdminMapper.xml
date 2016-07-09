@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.Admin" >
+    <id column="Admin_id" property="adminId" jdbcType="VARCHAR" />
+    <result column="Ad_psw" property="adPsw" jdbcType="VARCHAR" />
+    <result column="Ad_group" property="adGroup" jdbcType="VARCHAR" />
+    <result column="Ad_level" property="adLevel" jdbcType="INTEGER" />
+    <result column="Ad_status" property="adStatus" jdbcType="VARCHAR" />
+    <result column="Ad_email" property="adEmail" jdbcType="VARCHAR" />
+    <result column="Ad_memo" property="adMemo" jdbcType="VARCHAR" />
+    <result column="Ad_phone" property="adPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Admin_id, Ad_psw, Ad_group, Ad_level, Ad_status, Ad_email, Ad_memo, Ad_phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where Admin_id = #{adminId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from admin
+    where Admin_id = #{adminId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.Admin" >
+    insert into admin (Admin_id, Ad_psw, Ad_group, 
+      Ad_level, Ad_status, Ad_email, 
+      Ad_memo, Ad_phone)
+    values (#{adminId,jdbcType=VARCHAR}, #{adPsw,jdbcType=VARCHAR}, #{adGroup,jdbcType=VARCHAR}, 
+      #{adLevel,jdbcType=INTEGER}, #{adStatus,jdbcType=VARCHAR}, #{adEmail,jdbcType=VARCHAR}, 
+      #{adMemo,jdbcType=VARCHAR}, #{adPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        Admin_id,
+      </if>
+      <if test="adPsw != null" >
+        Ad_psw,
+      </if>
+      <if test="adGroup != null" >
+        Ad_group,
+      </if>
+      <if test="adLevel != null" >
+        Ad_level,
+      </if>
+      <if test="adStatus != null" >
+        Ad_status,
+      </if>
+      <if test="adEmail != null" >
+        Ad_email,
+      </if>
+      <if test="adMemo != null" >
+        Ad_memo,
+      </if>
+      <if test="adPhone != null" >
+        Ad_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="adPsw != null" >
+        #{adPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="adGroup != null" >
+        #{adGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="adLevel != null" >
+        #{adLevel,jdbcType=INTEGER},
+      </if>
+      <if test="adStatus != null" >
+        #{adStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="adEmail != null" >
+        #{adEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adMemo != null" >
+        #{adMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="adPhone != null" >
+        #{adPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.Admin" >
+    update admin
+    <set >
+      <if test="adPsw != null" >
+        Ad_psw = #{adPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="adGroup != null" >
+        Ad_group = #{adGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="adLevel != null" >
+        Ad_level = #{adLevel,jdbcType=INTEGER},
+      </if>
+      <if test="adStatus != null" >
+        Ad_status = #{adStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="adEmail != null" >
+        Ad_email = #{adEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adMemo != null" >
+        Ad_memo = #{adMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="adPhone != null" >
+        Ad_phone = #{adPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Admin_id = #{adminId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.Admin" >
+    update admin
+    set Ad_psw = #{adPsw,jdbcType=VARCHAR},
+      Ad_group = #{adGroup,jdbcType=VARCHAR},
+      Ad_level = #{adLevel,jdbcType=INTEGER},
+      Ad_status = #{adStatus,jdbcType=VARCHAR},
+      Ad_email = #{adEmail,jdbcType=VARCHAR},
+      Ad_memo = #{adMemo,jdbcType=VARCHAR},
+      Ad_phone = #{adPhone,jdbcType=VARCHAR}
+    where Admin_id = #{adminId,jdbcType=VARCHAR}
+  </update>
+</mapper>

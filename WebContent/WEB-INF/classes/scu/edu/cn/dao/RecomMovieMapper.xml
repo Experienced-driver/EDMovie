@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.RecomMovieMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.RecomMovie" >
+    <id column="recom_m_id" property="recomMId" jdbcType="INTEGER" />
+    <result column="Mv_id" property="mvId" jdbcType="INTEGER" />
+    <result column="para_1" property="para1" jdbcType="REAL" />
+    <result column="para_2" property="para2" jdbcType="REAL" />
+    <result column="para_3" property="para3" jdbcType="REAL" />
+    <result column="para_4" property="para4" jdbcType="REAL" />
+    <result column="para_5" property="para5" jdbcType="REAL" />
+    <result column="last_m_time" property="lastMTime" jdbcType="TIME" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    recom_m_id, Mv_id, para_1, para_2, para_3, para_4, para_5, last_m_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from recom_m
+    where recom_m_id = #{recomMId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from recom_m
+    where recom_m_id = #{recomMId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.RecomMovie" >
+    insert into recom_m (recom_m_id, Mv_id, para_1, 
+      para_2, para_3, para_4, para_5, 
+      last_m_time)
+    values (#{recomMId,jdbcType=INTEGER}, #{mvId,jdbcType=INTEGER}, #{para1,jdbcType=REAL}, 
+      #{para2,jdbcType=REAL}, #{para3,jdbcType=REAL}, #{para4,jdbcType=REAL}, #{para5,jdbcType=REAL}, 
+      #{lastMTime,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.RecomMovie" >
+    insert into recom_m
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recomMId != null" >
+        recom_m_id,
+      </if>
+      <if test="mvId != null" >
+        Mv_id,
+      </if>
+      <if test="para1 != null" >
+        para_1,
+      </if>
+      <if test="para2 != null" >
+        para_2,
+      </if>
+      <if test="para3 != null" >
+        para_3,
+      </if>
+      <if test="para4 != null" >
+        para_4,
+      </if>
+      <if test="para5 != null" >
+        para_5,
+      </if>
+      <if test="lastMTime != null" >
+        last_m_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recomMId != null" >
+        #{recomMId,jdbcType=INTEGER},
+      </if>
+      <if test="mvId != null" >
+        #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="para1 != null" >
+        #{para1,jdbcType=REAL},
+      </if>
+      <if test="para2 != null" >
+        #{para2,jdbcType=REAL},
+      </if>
+      <if test="para3 != null" >
+        #{para3,jdbcType=REAL},
+      </if>
+      <if test="para4 != null" >
+        #{para4,jdbcType=REAL},
+      </if>
+      <if test="para5 != null" >
+        #{para5,jdbcType=REAL},
+      </if>
+      <if test="lastMTime != null" >
+        #{lastMTime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.RecomMovie" >
+    update recom_m
+    <set >
+      <if test="mvId != null" >
+        Mv_id = #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="para1 != null" >
+        para_1 = #{para1,jdbcType=REAL},
+      </if>
+      <if test="para2 != null" >
+        para_2 = #{para2,jdbcType=REAL},
+      </if>
+      <if test="para3 != null" >
+        para_3 = #{para3,jdbcType=REAL},
+      </if>
+      <if test="para4 != null" >
+        para_4 = #{para4,jdbcType=REAL},
+      </if>
+      <if test="para5 != null" >
+        para_5 = #{para5,jdbcType=REAL},
+      </if>
+      <if test="lastMTime != null" >
+        last_m_time = #{lastMTime,jdbcType=TIME},
+      </if>
+    </set>
+    where recom_m_id = #{recomMId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.RecomMovie" >
+    update recom_m
+    set Mv_id = #{mvId,jdbcType=INTEGER},
+      para_1 = #{para1,jdbcType=REAL},
+      para_2 = #{para2,jdbcType=REAL},
+      para_3 = #{para3,jdbcType=REAL},
+      para_4 = #{para4,jdbcType=REAL},
+      para_5 = #{para5,jdbcType=REAL},
+      last_m_time = #{lastMTime,jdbcType=TIME}
+    where recom_m_id = #{recomMId,jdbcType=INTEGER}
+  </update>
+</mapper>

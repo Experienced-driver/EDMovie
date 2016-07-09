@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scu.edu.cn.dao.BoxMapper" >
+  <resultMap id="BaseResultMap" type="scu.edu.cn.domain.Box" >
+    <id column="box_id" property="boxId" jdbcType="INTEGER" />
+    <result column="box_mv_id" property="boxMvId" jdbcType="INTEGER" />
+    <result column="box_serial" property="boxSerial" jdbcType="VARCHAR" />
+    <result column="box_date" property="boxDate" jdbcType="TIMESTAMP" />
+    <result column="box_source" property="boxSource" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    box_id, box_mv_id, box_serial, box_date, box_source
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from box
+    where box_id = #{boxId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from box
+    where box_id = #{boxId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scu.edu.cn.domain.Box" >
+    insert into box (box_id, box_mv_id, box_serial, 
+      box_date, box_source)
+    values (#{boxId,jdbcType=INTEGER}, #{boxMvId,jdbcType=INTEGER}, #{boxSerial,jdbcType=VARCHAR}, 
+      #{boxDate,jdbcType=TIMESTAMP}, #{boxSource,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scu.edu.cn.domain.Box" >
+    insert into box
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="boxId != null" >
+        box_id,
+      </if>
+      <if test="boxMvId != null" >
+        box_mv_id,
+      </if>
+      <if test="boxSerial != null" >
+        box_serial,
+      </if>
+      <if test="boxDate != null" >
+        box_date,
+      </if>
+      <if test="boxSource != null" >
+        box_source,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="boxId != null" >
+        #{boxId,jdbcType=INTEGER},
+      </if>
+      <if test="boxMvId != null" >
+        #{boxMvId,jdbcType=INTEGER},
+      </if>
+      <if test="boxSerial != null" >
+        #{boxSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="boxDate != null" >
+        #{boxDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxSource != null" >
+        #{boxSource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scu.edu.cn.domain.Box" >
+    update box
+    <set >
+      <if test="boxMvId != null" >
+        box_mv_id = #{boxMvId,jdbcType=INTEGER},
+      </if>
+      <if test="boxSerial != null" >
+        box_serial = #{boxSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="boxDate != null" >
+        box_date = #{boxDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxSource != null" >
+        box_source = #{boxSource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where box_id = #{boxId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scu.edu.cn.domain.Box" >
+    update box
+    set box_mv_id = #{boxMvId,jdbcType=INTEGER},
+      box_serial = #{boxSerial,jdbcType=VARCHAR},
+      box_date = #{boxDate,jdbcType=TIMESTAMP},
+      box_source = #{boxSource,jdbcType=VARCHAR}
+    where box_id = #{boxId,jdbcType=INTEGER}
+  </update>
+</mapper>
