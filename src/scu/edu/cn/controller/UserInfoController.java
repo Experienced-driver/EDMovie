@@ -6,13 +6,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+
+import com.alibaba.fastjson.JSON;
 
 import scu.edu.cn.domain.UserInfo;
 import scu.edu.cn.service.UserInfoService;
@@ -20,7 +21,7 @@ import scu.edu.cn.service.UserInfoService;
 @Controller
 public class UserInfoController extends MultiActionController{
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
+	private static final Logger logger = Logger.getLogger(UserInfoController.class);
 		
 	@Resource
 	UserInfoService userInfoService;
@@ -31,7 +32,7 @@ public class UserInfoController extends MultiActionController{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String gender = request.getParameter("gender");
-		
+		logger.info(username+gender);
 		userInfo.setUsername(username);
 		userInfo.setPassword(password);
 		userInfo.setGender(gender);
@@ -43,7 +44,7 @@ public class UserInfoController extends MultiActionController{
 		userInfo.setSignDate(date);
 //		userInfo.setUserId(11);
 		userInfo.setUserStatus(gender);
-		
+		logger.info(JSON.toJSONString(userInfo));
 		userInfoService.addUserInfo(userInfo);
 		
 		return new ModelAndView("UserRegistered");
