@@ -42,8 +42,11 @@ public class UserInfoServiceTest {
 
 	@Test
 	public void testGetUserInfoById() {
-		UserInfo userInfo = userInfoService.getUserInfoById(26);
-		logger.info(JSON.toJSONString(userInfo));
+		UserInfo userInfo = userInfoService.getUserInfoById(50);
+//		logger.info(JSON.toJSONString(userInfo));
+		if(JSON.toJSONString(userInfo).equals(null)){
+			logger.info(JSON.toJSONString(userInfo));
+		}
 	}
 
 }

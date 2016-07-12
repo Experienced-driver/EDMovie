@@ -48,10 +48,10 @@
 	    class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 	    <!-- class="org.springframework.jdbc.datasource.SimpleDriverDataSource -->
 	    <!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource -->
-		<property name="driverClass" value="${driver}" />
-		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 		<!-- 初始化连接大小 -->
 		<!-- 连接池最大数量 -->
 		<!-- 连接池最大空闲 -->

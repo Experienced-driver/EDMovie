@@ -21,9 +21,6 @@ public class UserInfo {
 
     private String userStatus;
 
-    public UserInfo(){
-    	
-    }
     public Integer getUserId() {
         return userId;
     }

@@ -1,6 +1,7 @@
 package scu.edu.cn.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,14 +16,16 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.alibaba.fastjson.JSON;
 
+import scu.edu.cn.domain.Page;
 import scu.edu.cn.domain.UserInfo;
 import scu.edu.cn.service.UserInfoService;
+import scu.edu.cn.util.PageData;
 
 @Controller
-public class UserInfoController extends MultiActionController{
+public class UserInfoController extends BaseController{
 	
 	private static final Logger logger = Logger.getLogger(UserInfoController.class);
-		
+	
 	@Resource
 	UserInfoService userInfoService;
 	
@@ -38,11 +41,10 @@ public class UserInfoController extends MultiActionController{
 		userInfo.setGender(gender);
 		
 		userInfo.setEmail("445358008@qq.com");
-		Date date = new Date(2011,10,28,10,12,50); 
+		Date date = new Date(); 
 		userInfo.setBirthdate(date);
 		userInfo.setQq(445358009);
 		userInfo.setSignDate(date);
-//		userInfo.setUserId(11);
 		userInfo.setUserStatus(gender);
 		logger.info(JSON.toJSONString(userInfo));
 		userInfoService.addUserInfo(userInfo);
@@ -50,4 +52,18 @@ public class UserInfoController extends MultiActionController{
 		return new ModelAndView("UserRegistered");
 	}
 	
+	@RequestMapping(value="/dictionaries")
+	public ModelAndView listUsers(Page page)throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();	
+		
+		page.setPd(pd);
+		List<UserInfo>	userList = userInfoService.listPdPageUser();			//列出用户列表
+		logger.info(JSON.toJSON(userList));
+		mv.setViewName("system/user/user_list");
+		mv.addObject("userList", JSON.toJSON(userList));
+		mv.addObject("pd", pd);
+		return mv;
+	}
 }
